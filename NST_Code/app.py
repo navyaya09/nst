@@ -38,7 +38,7 @@ else:
 
 print("Using device:", device)
 
-encoder = VGGEncoder('vgg_normalised.pth').to(device)
+encoder = VGGEncoder('NST_Code/vgg_normalised.pth').to(device)
 decoder = Decoder().to(device)
 decoder.load_state_dict(torch.load('experiment/final_exp/decoder_final.pth', map_location=device))
 
