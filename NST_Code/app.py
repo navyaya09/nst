@@ -11,8 +11,8 @@ from torchvision import transforms
 import io
 
 # Import your existing AdaIN code
-from utils.models import VGGEncoder, Decoder
-from utils.utils import adaptive_instance_normalization, calc_mean_std
+from NST_Code.utils.models import VGGEncoder, Decoder
+from NST_Code.utils.utils import adaptive_instance_normalization, calc_mean_std
 
 
 app = Flask(__name__)
@@ -147,11 +147,10 @@ def send_example(filename):
     return send_from_directory('examples', filename)
 
 
+
 if __name__ == '__main__':
-    from werkzeug.serving import run_simple
-    run_simple('localhost', 5000, app, use_reloader=True, use_debugger=True)
-
-
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 
 
