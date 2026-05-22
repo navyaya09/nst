@@ -11,9 +11,8 @@ from torchvision import transforms
 import io
 
 # Import your existing AdaIN code
-from NST_Code.utils.models import VGGEncoder, Decoder
-from NST_Code.utils.utils import adaptive_instance_normalization, calc_mean_std
-
+from utils.models import VGGEncoder, Decoder
+from utils.utils import adaptive_instance_normalization
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
@@ -41,7 +40,6 @@ print("Using device:", device)
 encoder = VGGEncoder('NST_Code/vgg_normalised.pth').to(device)
 decoder = Decoder().to(device)
 decoder.load_state_dict(torch.load('experiment/final_exp/decoder_final.pth', map_location=device))
-
 encoder.eval()
 decoder.eval()
 
@@ -149,7 +147,7 @@ def send_example(filename):
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 7860))
     app.run(host='0.0.0.0', port=port)
 
 
